@@ -22,5 +22,10 @@ public interface EmployeeDao {
     void update(Employee employee);
     @Delete
     void delete(Employee employee);
+
+
+    @Query("DELETE FROM employee")
+    void deleteAll();
+
 }
 
