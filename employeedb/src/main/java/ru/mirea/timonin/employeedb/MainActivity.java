@@ -73,20 +73,36 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickSave(View view){
         Employee superHero = new Employee();
+        Integer age;
+        String name;
+        Integer id;
+        try {
+            age = Integer.parseInt(superHeroAge.getText().toString());
+            name = superHeroName.getText().toString();
+            id = Integer.parseInt( superHeroId.getText().toString());
 
-        Integer age = Integer.parseInt(superHeroAge.getText().toString());
-        String name = superHeroName.getText().toString();
-        Integer id = Integer.parseInt( superHeroId.getText().toString());
+        }catch (Exception e){
+            age = 0;
+            name= " ";
+            id = -1;
+            Toast toast = Toast.makeText(this, "Для сохранения необходимо заполнить поля!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+
 
 
 
         try {
-            superHero.id = id;
-            superHero.salary =age;
-            superHero.name = name;
-            employeeDao.insert(superHero);
-            String superHeroInfo = id+": " + name + "                 Возраст: " + age ;
-            Names.add(superHeroInfo);
+            if (id!=-1){
+                superHero.id = id;
+                superHero.salary =age;
+                superHero.name = name;
+                employeeDao.insert(superHero);
+                String superHeroInfo = id+": " + name + "                 Возраст: " + age ;
+                Names.add(superHeroInfo);
+            }
+
         }catch (Exception e){
             Toast toast = Toast.makeText(this, "Такой ID уже есть, введите другой!", Toast.LENGTH_LONG);
             toast.show();
